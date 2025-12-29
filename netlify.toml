@@ -1,0 +1,12 @@
+[build]
+  base = "nanobanana-gallery"
+  command = "npm run build"
+  publish = "out"
+
+[build.processing]
+  skip_processing = true
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+  [plugins.inputs]
+    disable = true
