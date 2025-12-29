@@ -7,6 +7,8 @@ interface PromptCardProps {
   onClick: (item: PromptItem) => void;
 }
 
+const CDN_BASE_URL = 'https://cdn.jsdelivr.net/gh/GavinPG1/nanobanana-pro-gjc@main/public';
+
 export default function PromptCard({ item, onClick }: PromptCardProps) {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -25,7 +27,7 @@ export default function PromptCard({ item, onClick }: PromptCardProps) {
         
         {item.coverImage ? (
           <Image
-            src={`/${item.coverImage}`}
+            src={`${CDN_BASE_URL}/${item.coverImage}`}
             alt={item.title}
             fill
             className={`object-cover group-hover:scale-105 transition-all duration-500 ${
@@ -33,6 +35,8 @@ export default function PromptCard({ item, onClick }: PromptCardProps) {
             }`}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             onLoad={() => setIsLoading(false)}
+            loading="lazy"
+            quality={60}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-slate-500">

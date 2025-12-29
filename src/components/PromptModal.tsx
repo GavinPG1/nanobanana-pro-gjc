@@ -10,6 +10,8 @@ interface PromptModalProps {
   onClose: () => void;
 }
 
+const CDN_BASE_URL = 'https://cdn.jsdelivr.net/gh/GavinPG1/nanobanana-pro-gjc@main/public';
+
 export default function PromptModal({ item, onClose }: PromptModalProps) {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
@@ -48,7 +50,7 @@ export default function PromptModal({ item, onClose }: PromptModalProps) {
             {item.images.map((img, idx) => (
               <div key={idx} className="relative w-full aspect-square md:aspect-auto">
                 <img 
-                  src={`/${img}`} 
+                  src={`${CDN_BASE_URL}/${img}`} 
                   alt={`${item.title} ${idx + 1}`}
                   className="w-full h-auto rounded-xl object-contain"
                 />

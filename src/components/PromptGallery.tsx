@@ -22,7 +22,7 @@ export default function PromptGallery({ initialItems }: PromptGalleryProps) {
   } = usePrompts(initialItems);
 
   const [selectedItem, setSelectedItem] = useState<PromptItem | null>(null);
-  const [displayCount, setDisplayCount] = useState(24);
+  const [displayCount, setDisplayCount] = useState(12);
 
   const visibleItems = filteredItems.slice(0, displayCount);
 
@@ -97,7 +97,7 @@ export default function PromptGallery({ initialItems }: PromptGalleryProps) {
       {displayCount < filteredItems.length && (
         <div className="mt-12 text-center">
           <button
-            onClick={() => setDisplayCount(prev => prev + 24)}
+            onClick={() => setDisplayCount(prev => prev + 12)}
             className="px-8 py-3 bg-sky-500 hover:bg-sky-600 text-white rounded-xl font-semibold transition-all shadow-lg shadow-sky-500/20"
           >
             加载更多案例
