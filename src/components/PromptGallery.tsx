@@ -22,6 +22,9 @@ export default function PromptGallery({ initialItems }: PromptGalleryProps) {
   } = usePrompts(initialItems);
 
   const [selectedItem, setSelectedItem] = useState<PromptItem | null>(null);
+  const [displayCount, setDisplayCount] = useState(24);
+
+  const visibleItems = filteredItems.slice(0, displayCount);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
@@ -69,8 +72,8 @@ export default function PromptGallery({ initialItems }: PromptGalleryProps) {
               onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
               className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all border ${
                 selectedTag === tag
-                  ? 'bg-sky-500 border-sky-500 text-white shadow-lg shadow-sky-500/20'
-                  : 'bg-[#1e293b] border-slate-700 text-slate-400 hover:border-slate-500 hover:text-white'
+              ? 'bg-sky-500 border-sky-500 text-white shadow-lg shadow-sky-500/20'
+              : 'bg-[#1e293b] border-slate-700 text-slate-400 hover:border-slate-500 hover:text-white'
               }`}
             >
               {tag}
@@ -81,7 +84,7 @@ export default function PromptGallery({ initialItems }: PromptGalleryProps) {
 
       {/* Grid Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {filteredItems.map(item => (
+        {visibleItems.map(item => (
           <PromptCard 
             key={item.id} 
             item={item} 
@@ -89,6 +92,18 @@ export default function PromptGallery({ initialItems }: PromptGalleryProps) {
           />
         ))}
       </div>
+
+      {/* Load More Button */}
+      {displayCount < filteredItems.length && (
+        <div className="mt-12 text-center">
+          <button
+            onClick={() => setDisplayCount(prev => prev + 24)}
+            className="px-8 py-3 bg-sky-500 hover:bg-sky-600 text-white rounded-xl font-semibold transition-all shadow-lg shadow-sky-500/20"
+          >
+            加载更多案例
+          </button>
+        </div>
+      )}
 
       {filteredItems.length === 0 && (
         <div className="text-center py-20">
